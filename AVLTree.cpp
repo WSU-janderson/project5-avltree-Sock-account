@@ -1,8 +1,25 @@
 #include "AVLTree.h"
 
 #include <string>
+using namespace std;
 
+bool AVLTree::insert(const string& key, size_t value) {
+
+}
+
+bool AVLTree::remove(const string& key) {
+
+}
+
+bool AVLTree::contains(const string& key) const {
+
+}
+
+optional<size_t>AVLTree::get(const string& key) const {
+
+}
 size_t AVLTree::AVLNode::numChildren() const {
+
     return 0;
 }
 

@@ -34,9 +34,13 @@ protected:
     };
 
 public:
+    bool insert(const string& key, size_t value);
 
+    bool remove(const string& key);
 
+    bool contains(const string& key) const;
 
+    std::optional<size_t>get(const string& key) const;
 
     private:
     AVLNode* root;
