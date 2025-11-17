@@ -10,12 +10,40 @@ bool AVLTree::insert(const string& key, size_t value) {
             root = newNode;
             return true;
         }
-        if (key < root->key) {
+        if (key < root->key && root->left == nullptr) {
             root-> left = newNode;
             return true;
+        }if (key < root->key && root->left != nullptr) {
+            AVLNode* temp = root->left;
+            while (temp !=  nullptr) {
+            if (key < temp->key) {
+                temp = temp->left;
+            }else if (key > temp->key) {
+                temp = temp->right;
+            }
+            }
+            temp = newNode;
+            return true;
         }
-        if (key > root->key){
+        if (key > root->key && root->right == nullptr) {
             root->right = newNode;
+            return true;
+        }if (key > root->key && root->right != nullptr) {
+            AVLNode* temp = root->right;
+            while (temp != nullptr) {
+                if (key > temp->key) {
+                    temp = temp->right;
+                }else if (key < temp->key) {
+                    temp = temp->left;
+                }
+            }
+            temp = newNode;
+            if (root->right != nullptr) {
+                AVLNode* tamp = root;
+                root->left = tamp;
+                root = temp;
+                root->right = newNode;
+            }
             return true;
         }
     }
