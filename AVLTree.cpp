@@ -4,30 +4,53 @@
 using namespace std;
 
 bool AVLTree::insert(const string& key, size_t value) {
-
+    AVLNode* newNode = new AVLNode(key, value);
+    for (int i = 0; i < value; i++) {
+        if (root == nullptr) {
+            root = newNode;
+            return true;
+        }
+        if (key < root->key) {
+            root-> left = newNode;
+            return true;
+        }
+        if (key > root->key){
+            root->right = newNode;
+            return true;
+        }
+    }
+    return false;
 }
 
 bool AVLTree::remove(const string& key) {
 
+
+    return false;
 }
 
 bool AVLTree::contains(const string& key) const {
 
+    return false;
 }
 
 optional<size_t>AVLTree::get(const string& key) const {
 
+    return nullopt;
 }
 string& AVLTree::operator[](const size_t& key) {
 
+    return root->key;
 }
 vector<string> AVLTree::findRange(const string& lowKey, const string& highKey) const {
 
+    return vector<string>();
 }
 vector<string> AVLTree::keys() const {
 
+    return vector<string>();
 }
 AVLTree::AVLTree(const AVLTree& other) {
+
 
 }
 void AVLTree::operator=(const AVLTree& other) {
@@ -38,6 +61,7 @@ AVLTree::~AVLTree() {
 }
 ostream& operator<<(ostream& os, const AVLTree & avlTree) {
 
+    return os;
 }
 size_t AVLTree::AVLNode::numChildren() const {
 

@@ -11,6 +11,7 @@ using namespace std;
 
 class AVLTree {
 public:
+
     using KeyType = std::string;
     using ValueType = size_t;
 
@@ -36,6 +37,9 @@ protected:
     };
 
 public:
+   AVLTree() : root(nullptr) {
+
+   }
     bool insert(const string& key, size_t value);
 
     bool remove(const string& key);
