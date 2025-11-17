@@ -37,12 +37,13 @@ bool AVLTree::insert(const string& key, size_t value) {
                     temp = temp->left;
                 }
             }
-            temp = newNode;
+            newNode = temp;
+
             if (root->right != nullptr) {
                 AVLNode* tamp = root;
                 root->left = tamp;
                 root = temp;
-                root->right = newNode;
+
             }
             return true;
         }
