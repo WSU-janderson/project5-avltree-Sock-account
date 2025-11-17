@@ -1,6 +1,6 @@
 #include "AVLTree.h"
-
 #include <string>
+#include <iostream>
 using namespace std;
 
 bool AVLTree::insert(const string& key, size_t value) {
@@ -31,6 +31,12 @@ AVLTree::AVLTree(const AVLTree& other) {
 
 }
 void AVLTree::operator=(const AVLTree& other) {
+
+}
+AVLTree::~AVLTree() {
+
+}
+ostream& operator<<(ostream& os, const AVLTree & avlTree) {
 
 }
 size_t AVLTree::AVLNode::numChildren() const {
