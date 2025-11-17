@@ -18,6 +18,21 @@ bool AVLTree::contains(const string& key) const {
 optional<size_t>AVLTree::get(const string& key) const {
 
 }
+string& AVLTree::operator[](const size_t& key) {
+
+}
+vector<string> AVLTree::findRange(const string& lowKey, const string& highKey) const {
+
+}
+vector<string> AVLTree::keys() const {
+
+}
+AVLTree::AVLTree(const AVLTree& other) {
+
+}
+void AVLTree::operator=(const AVLTree& other) {
+
+}
 size_t AVLTree::AVLNode::numChildren() const {
 
     return 0;

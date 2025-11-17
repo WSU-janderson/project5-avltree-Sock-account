@@ -5,7 +5,8 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
 #include <string>
-
+#include <optional>
+#include <vector>
 using namespace std;
 
 class AVLTree {
@@ -31,6 +32,7 @@ protected:
         size_t getHeight() const;
 
 
+
     };
 
 public:
@@ -42,6 +44,18 @@ public:
 
     std::optional<size_t>get(const string& key) const;
 
+    string& operator[](const size_t& key);
+
+    vector<string>findRange(const string& lowKey, const string& highKey) const;
+
+    vector<string> keys() const;
+
+    size_t size() const;
+
+    size_t getHeight() const;
+
+    void operator=(const AVLTree& other);
+    AVLTree(const AVLTree& other);
     private:
     AVLNode* root;
 
