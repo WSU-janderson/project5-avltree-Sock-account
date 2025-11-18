@@ -22,7 +22,16 @@ bool AVLTree::insert(const string& key, size_t value) {
                 temp = temp->right;
             }
             }
+            //Right rotation
             temp = newNode;
+            if (root->left != nullptr) {
+                AVLNode* tamp = root;
+                AVLNode* tamp2 = root->left;
+                tamp->left = nullptr;
+                root = tamp2;
+                root->left = tamp;
+                root->right = temp;
+            }
             return true;
         }
         if (key > root->key && root->right == nullptr) {
@@ -37,8 +46,10 @@ bool AVLTree::insert(const string& key, size_t value) {
                     temp = temp->left;
                 }
             }
-            temp = newNode;
 
+
+            //Left rotation
+            temp = newNode;
             if (root->right != nullptr) {
                 AVLNode* tamp = root;
                 AVLNode* tamp2 = root->right;
@@ -56,6 +67,27 @@ bool AVLTree::insert(const string& key, size_t value) {
 
 bool AVLTree::remove(const string& key) {
 
+    AVLNode* temp = root;
+    if (temp->key == key) {
+        root = root->right;
+        root->right = nullptr;
+    }
+    while (temp != nullptr) {
+        if (key < temp->key) {
+            temp = temp->left;
+            if (temp->key == key) {
+                temp = nullptr;
+                temp = temp->left;
+            }
+        }else if (key > temp->key) {
+            temp = temp->right;
+            if (temp->key == key) {
+                temp = nullptr;
+                temp = temp->left;
+            }
+        }
+
+    }
 
     return false;
 }
