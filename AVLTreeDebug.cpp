@@ -16,11 +16,11 @@ int main() {
      AVLTree tree;
      bool insertResult;
      insertResult = tree.insert("F", 'F');
-     //insertResult = tree.insert("F", 'F'); // false, no duplicates allowed
-     //insertResult = tree.insert("K", 'K');
-     //insertResult = tree.insert("L", 'L');
-     //insertResult = tree.insert("X", 'X');// single rotate left
-     //insertResult = tree.insert("Y", 'Y');
+     insertResult = tree.insert("F", 'F'); // false, no duplicates allowed
+     insertResult = tree.insert("K", 'K');
+     insertResult = tree.insert("L", 'L');
+     insertResult = tree.insert("X", 'X');// single rotate left
+     insertResult = tree.insert("Y", 'Y');
     //cout << endl << endl;
   //bool removeResult;
   //removeResult = tree.remove("F");
