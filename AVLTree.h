@@ -6,6 +6,7 @@
 #define AVLTREE_H
 #include <string>
 #include <optional>
+#include <ranges>
 #include <vector>
 using namespace std;
 
@@ -66,7 +67,7 @@ public:
     AVLTree(const AVLTree& other);
     private:
     AVLNode* root;
-
+    bool re_insert(AVLNode*& node, string key,size_t value);
     /* Helper methods for remove */
     // this overloaded remove will do the recursion to remove the node
     bool remove(AVLNode*& current, KeyType key);

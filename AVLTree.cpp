@@ -4,7 +4,7 @@
 using namespace std;
 
 bool AVLTree::insert(const string& key, size_t value) {
-    AVLNode* newNode = new AVLNode(key, value);
+    /*AVLNode* newNode = new AVLNode(key, value);
     for (int i = 0; i < value; i++) {
         if (root == nullptr) {
             root = newNode;
@@ -62,10 +62,26 @@ bool AVLTree::insert(const string& key, size_t value) {
             }
             return true;
         }
-    }
+    }*/
+    re_insert(root, key, value);
     return false;
 }
+bool AVLTree::re_insert(AVLNode*& node, string key,size_t value) {
+    if (node == NULL) {
+        AVLNode* newNode = new AVLNode(key, value);
+        node = newNode;
+        return true;
+    }
+    if (node->key == key) {
+        return false;
+    }
+    if (node->key > key) {
+        return re_insert(node->left, key, value);
+    }if (node->key < key) {
+        return re_insert(node->right, key, value);
+    }
 
+}
 bool AVLTree::remove(const string& key) {
 
     if (root == nullptr) {
@@ -110,6 +126,7 @@ bool AVLTree::remove(const string& key) {
 
 
 }
+
 
 bool AVLTree::contains(const string& key) const {
     if (root == nullptr) {
