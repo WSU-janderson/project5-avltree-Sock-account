@@ -8,6 +8,7 @@ instead for you to get an idea of how to test the tree
 #include <string>
 #include <ranges>
 #include <vector>
+#include <ostream>
 using namespace std;
 
 
@@ -17,12 +18,18 @@ int main() {
      insertResult = tree.insert("F", 'F');
      insertResult = tree.insert("F", 'F'); // false, no duplicates allowed
      insertResult = tree.insert("K", 'K');
+     insertResult = tree.insert("L", 'L');
      insertResult = tree.insert("X", 'X');// single rotate left
      insertResult = tree.insert("Y", 'Y');
     //cout << endl << endl;
-    cout << tree << endl;
-    //
-     //insertResult = tree.insert("C", 'C');
+  //bool removeResult;
+  //removeResult = tree.remove("F");
+  //cout << tree << endl;
+ //bool containsResult;
+ //containsResult = tree.contains("F");
+     //optional<int> getResult = tree.get("Y");
+
+    //insertResult = tree.insert("C", 'C');
      //insertResult = tree.insert("A", 'A'); // single rotate right
     // cout << endl << endl;
     // cout << tree << endl;

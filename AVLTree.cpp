@@ -24,6 +24,7 @@ bool AVLTree::insert(const string& key, size_t value) {
             }
             //Right rotation
             temp = newNode;
+            root->height++;
             if (root->left != nullptr) {
                 AVLNode* tamp = root;
                 AVLNode* tamp2 = root->left;
@@ -67,42 +68,161 @@ bool AVLTree::insert(const string& key, size_t value) {
 
 bool AVLTree::remove(const string& key) {
 
-    AVLNode* temp = root;
-    if (temp->key == key) {
+    if (root == nullptr) {
+        return false;
+    }
+
+    if (root->key == key) {
         root = root->right;
         root->right = nullptr;
     }
-    while (temp != nullptr) {
-        if (key < temp->key) {
+    else {
+
+    }
+    //Remove left
+    AVLNode* tamp = root->right;
+    AVLNode* temp = root->left;
+    while (true) {
+
+        if (key < temp->key && temp->left != nullptr) {
+            AVLNode* temp2 = temp;
             temp = temp->left;
             if (temp->key == key) {
-                temp = nullptr;
-                temp = temp->left;
+                temp = temp2;
+                temp->left = nullptr;
+                return true;
             }
-        }else if (key > temp->key) {
-            temp = temp->right;
-            if (temp->key == key) {
-                temp = nullptr;
-                temp = temp->left;
+            //Remove right
+        }else if (key > tamp->key && tamp->right != nullptr) {
+            AVLNode* tamp2 = tamp;
+            tamp = tamp->right;
+            if (tamp->key == key) {
+                tamp = tamp2;
+                tamp->right = nullptr;
+                return true;
             }
+
+        }else {
+            return false;
         }
 
     }
 
-    return false;
+
 }
 
 bool AVLTree::contains(const string& key) const {
+    if (root == nullptr) {
+        return false;
+    }
+    if (root->key == key) {
+        return true;
+    }
+
+            if (root->key > key) {
+            AVLNode* temp = root->left;
+            while (temp != nullptr) {
+                if (temp->key == key) {
+                    return true;
+                }
+                if (temp->key < key) {
+                    temp = temp->left;
+                }
+                if (temp->key > key) {
+                    temp = temp->right;
+                }
+            }
+        }else if (root->key > key) {
+            AVLNode* temp = root->right;
+            while (temp != nullptr) {
+                if (temp->key == key) {
+                    return true;
+                }
+                if (temp->key > key) {
+                    temp = temp->right;
+                }
+                if (temp->key < key) {
+                    temp = temp->left;
+                }
+            }
+        }
 
     return false;
 }
 
 optional<size_t>AVLTree::get(const string& key) const {
 
+    if (root == nullptr) {
+        return nullopt;
+    }
+    if (root->key == key) {
+        return root->value;
+    }
+
+    if (root->key < key) {
+        AVLNode* temp = root->right;
+        while (temp != nullptr) {
+            if (temp->key == key) {
+                return temp->value;
+            }
+            if (temp->key < key) {
+                temp = temp->right;
+            }
+            if (temp->key > key) {
+                temp = temp->left;
+            }
+        }
+    }else if (root->key > key) {
+        AVLNode* temp = root->left;
+        while (temp != nullptr) {
+            if (temp->key == key) {
+                return temp->value;
+            }
+            if (temp->key < key) {
+                temp = temp->right;
+            }
+            if (temp->key > key) {
+                temp = temp->left;
+            }
+        }
+    }
     return nullopt;
 }
 string& AVLTree::operator[](const size_t& key) {
+    if (root == nullptr) {
+        return root->key;
+    }
+    if (root->value == key) {
+        return root->key;
+    }
 
+    if (root->value < key) {
+        AVLNode* temp = root->right;
+        while (temp != nullptr) {
+            if (temp->value == key) {
+                return temp->key;
+            }
+            if (temp->value < key) {
+                temp = temp->right;
+            }
+            if (temp->value > key) {
+                temp = temp->left;
+            }
+        }
+    }else if (root->value > key) {
+        AVLNode* temp = root->left;
+        while (temp != nullptr) {
+            if (temp->value == key) {
+                return temp->key;
+            }
+            if (temp->value < key) {
+                temp = temp->right;
+            }
+            if (temp->value > key) {
+                temp = temp->left;
+            }
+        }
+    }
     return root->key;
 }
 vector<string> AVLTree::findRange(const string& lowKey, const string& highKey) const {
