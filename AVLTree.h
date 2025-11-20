@@ -47,9 +47,17 @@ public:
 
     bool contains(const string& key) const;
 
+    bool re_contains(AVLNode *&node, string key) const;
+
+    optional<size_t> re_get(AVLNode*& node, string key) const;
+
+    size_t& operator[](const std::string& key);
+
     std::optional<size_t>get(const string& key) const;
 
-    string& operator[](const size_t& key);
+    vector<string> re_keys() const;
+
+
 
     vector<string>findRange(const string& lowKey, const string& highKey) const;
 
@@ -68,6 +76,10 @@ public:
     private:
     AVLNode* root;
     bool re_insert(AVLNode*& node, string key,size_t value);
+
+    bool re_remove(AVLNode*& node, string key);
+
+    bool re_contains(AVLNode*& node, string key);
     /* Helper methods for remove */
     // this overloaded remove will do the recursion to remove the node
     bool remove(AVLNode*& current, KeyType key);

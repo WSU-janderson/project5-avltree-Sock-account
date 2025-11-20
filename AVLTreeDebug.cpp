@@ -20,13 +20,13 @@ int main() {
      insertResult = tree.insert("K", 'K');
      insertResult = tree.insert("L", 'L');
      insertResult = tree.insert("X", 'X');// single rotate left
-     insertResult = tree.insert("Y", 'Y');
+     insertResult = tree.insert("A", 'A');
     //cout << endl << endl;
   //bool removeResult;
   //removeResult = tree.remove("F");
   //cout << tree << endl;
  //bool containsResult;
- //containsResult = tree.contains("F");
+  //containsResult = tree.contains("F");
      //optional<int> getResult = tree.get("Y");
 
     //insertResult = tree.insert("C", 'C');
@@ -74,17 +74,17 @@ int main() {
 //    cout << endl;
 //
 //    // findRange
-//    vector<int> rangeTest = tree.findRange("D", "W");
+    //std::vector<size_t> rangeTest = tree.findRange("D", "W");
 //    // 70 68 82 75 77 86
-//    for (auto val: rangeTest) {
-//        cout << val << " ";
-//    }
-//    cout << endl << endl;
+    //for (auto val: rangeTest) {
+    //    cout << val << " ";
+    //}
+    ///cout << endl << endl;
 //
 //    // operator[]
-//    tree["A"] = 108;
-//    cout << tree << endl;
-//    cout << endl;
+    tree["A"] = 108;
+    cout << tree["A"] << endl;
+    cout << endl;
 //
 //    // remove
 //    bool removeResult;
