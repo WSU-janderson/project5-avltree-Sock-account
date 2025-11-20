@@ -50,49 +50,9 @@ bool AVLTree::re_insert(AVLNode*& node, string key,size_t value) {
 }
 bool AVLTree::remove(const string& key) {
 
-    /*if (root == nullptr) {
-        return false;
-    }
 
-    if (root->key == key) {
-        root = root->right;
-        root->right = nullptr;
-    }
-    else {
+    return re_remove(root, key);
 
-    }
-    //Remove left
-    AVLNode* tamp = root->right;
-    AVLNode* temp = root->left;
-    while (true) {
-
-        if (key < temp->key && temp->left != nullptr) {
-            AVLNode* temp2 = temp;
-            temp = temp->left;
-            if (temp->key == key) {
-                temp = temp2;
-                temp->left = nullptr;
-                return true;
-            }
-            //Remove right
-        }else if (key > tamp->key && tamp->right != nullptr) {
-            AVLNode* tamp2 = tamp;
-            tamp = tamp->right;
-            if (tamp->key == key) {
-                tamp = tamp2;
-                tamp->right = nullptr;
-                return true;
-            }
-
-        }else {
-            return false;
-        }
-
-    }*/
-
-re_remove(root, key);
-
-    return true;
 }
 bool AVLTree::re_remove(AVLNode*& node, string key) {
     if (node == NULL) {
@@ -113,43 +73,10 @@ bool AVLTree::re_remove(AVLNode*& node, string key) {
 
 
 bool AVLTree::contains(const string& key) const {
-    /*if (root == nullptr) {
-        return false;
-    }
-    if (root->key == key) {
-        return true;
-    }
 
-            if (root->key > key) {
-            AVLNode* temp = root->left;
-            while (temp != nullptr) {
-                if (temp->key == key) {
-                    return true;
-                }
-                if (temp->key < key) {
-                    temp = temp->left;
-                }
-                if (temp->key > key) {
-                    temp = temp->right;
-                }
-            }
-        }else if (root->key > key) {
-            AVLNode* temp = root->right;
-            while (temp != nullptr) {
-                if (temp->key == key) {
-                    return true;
-                }
-                if (temp->key > key) {
-                    temp = temp->right;
-                }
-                if (temp->key < key) {
-                    temp = temp->left;
-                }
-            }
-        }*/
     AVLNode* temp = root;
-    re_contains(temp, key);
-    return true;
+    return re_contains(temp, key);
+
 }
 
 bool AVLTree::re_contains(AVLNode*& node, string key)const{
@@ -168,48 +95,14 @@ return true;
 
 optional<size_t>AVLTree::get(const string& key) const {
 
-    /*if (root == nullptr) {
-        return nullopt;
-    }
-    if (root->key == key) {
-        return root->value;
-    }
 
-    if (root->key < key) {
-        AVLNode* temp = root->right;
-        while (temp != nullptr) {
-            if (temp->key == key) {
-                return temp->value;
-            }
-            if (temp->key < key) {
-                temp = temp->right;
-            }
-            if (temp->key > key) {
-                temp = temp->left;
-            }
-        }
-    }else if (root->key > key) {
-        AVLNode* temp = root->left;
-        while (temp != nullptr) {
-            if (temp->key == key) {
-                return temp->value;
-            }
-            if (temp->key < key) {
-                temp = temp->right;
-            }
-            if (temp->key > key) {
-                temp = temp->left;
-            }
-        }
-    }*/
-    AVLNode* temp = root;
-    re_get(temp,key);
-    return temp->value;
+
+    return re_get(root,key);
 }
 
-optional<size_t> AVLTree::re_get(AVLNode *&node, string key) const {
+optional<size_t> AVLTree::re_get(const AVLNode *const&node, string key) const {
         if (node == NULL) {
-            return 0;
+            return nullopt;
         }if (node->key == key) {
             return node->value;
         }if (node->key > key) {
@@ -217,44 +110,27 @@ optional<size_t> AVLTree::re_get(AVLNode *&node, string key) const {
         }if (node->key < key) {
             return re_get(node->right, key);
         }
-    return node->value;
+    return make_optional(node->value);
 }
 
 size_t& AVLTree::operator[](const std::string& key) {
-    if (root->key == key) {
-        return root->value;
-    }
 
-    if (root->key < key) {
-        AVLNode* temp = root->right;
-        while (temp != NULL) {
-            if (temp->key == key) {
-                return temp->value;
-            }
-            if (temp->key < key) {
-                temp = temp->right;
-            }
-            if (temp->key > key) {
-                temp = temp->left;
-            }
-        }
-    }else if (root->key > key) {
-        AVLNode* temp = root->left;
-        while (temp != NULL) {
-            if (temp->key == key) {
-                return temp->value;
-            }
-            if (temp->key < key) {
-                temp = temp->right;
-            }
-            if (temp->key > key) {
-                temp = temp->left;
-            }
-        }
-    }
 
-    return root->value;
+    return re_operator_brackets(root, key);
 }
+size_t& AVLTree::re_operator_brackets( AVLNode * node,const std::string& key) {
+    if (node->key == key) {
+        return node->value;
+    }if (node->key > key) {
+        return re_operator_brackets(node->left, key);
+    }if (node->key < key) {
+        return re_operator_brackets(node->right, key);
+    }
+    return node->value;
+}
+
+
+//TODO:
 vector<string> AVLTree::findRange(const string & lowKey, const string & highKey) const {
 
     return vector<string>();

@@ -49,7 +49,9 @@ public:
 
     bool re_contains(AVLNode *&node, string key) const;
 
-    optional<size_t> re_get(AVLNode*& node, string key) const;
+    optional<size_t> re_get(const AVLNode*const& node, string key) const;
+
+    size_t& re_operator_brackets(AVLNode* node,const std::string& key);
 
     size_t& operator[](const std::string& key);
 
