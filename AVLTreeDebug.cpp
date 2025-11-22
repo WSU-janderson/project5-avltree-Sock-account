@@ -82,9 +82,9 @@ int main() {
     ///cout << endl << endl;
 //
 //    // operator[]
-    tree["A"] = 108;
-    cout << tree["A"] << endl;
-    cout << endl;
+//    tree["A"] = 108;
+//    cout << tree["A"] << endl;
+//    cout << endl;
 //
 //    // remove
 //    bool removeResult;

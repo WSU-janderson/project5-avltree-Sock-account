@@ -231,8 +231,20 @@ bool AVLTree::removeNode(AVLNode*& current){
 }
 
 bool AVLTree::remove(AVLNode *&current, KeyType key) {
-    return false;
-}
 
+    return re_remove_keytype(current, key);
+}
+bool AVLTree::re_remove_keytype(AVLNode *&current, KeyType key) {
+    if (current == NULL) {
+        return false;
+    }if (current->key == key) {
+        current = NULL;
+        return true;
+    }if (current->key > key) {
+        return re_remove_keytype(current->left, key);
+    }if (current->key < key) {
+        return re_remove_keytype(current->right, key);
+    }
+}
 void AVLTree::balanceNode(AVLNode *&node) {
 }
