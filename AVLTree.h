@@ -61,6 +61,8 @@ public:
 
     bool re_remove_keytype(AVLNode*& node, KeyType key);
 
+    vector<string>re_findRange(AVLNode *high, AVLNode *low, vector<string> range, AVLNode * temp) const;
+
     vector<string>findRange(const string& lowKey, const string& highKey) const;
 
     vector<string> keys() const;

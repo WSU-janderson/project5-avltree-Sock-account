@@ -132,8 +132,32 @@ size_t& AVLTree::re_operator_brackets( AVLNode * node,const std::string& key) {
 
 //TODO:
 vector<string> AVLTree::findRange(const string & lowKey, const string & highKey) const {
+    AVLNode * temp = root;
+    temp->key = lowKey;
+    AVLNode *temp2 = root;
+    temp2->key = highKey;
+    vector<string> range;
+    AVLNode * temp3 = root;
+    return re_findRange(temp, temp2, range, temp3);
 
-    return vector<string>();
+}
+vector<string> AVLTree::re_findRange(AVLNode *high, AVLNode *low,vector<string> range, AVLNode * temp) const {
+
+    if (high == NULL || low == NULL) {
+        return range;
+    }if (high->key == temp->key && range[0] != temp->key) {
+        range.push_back(high->key);
+        if (low->key == temp->key && range[0] != temp->key) {
+            range.push_back(low->key);
+            return re_findRange(high, low, range, temp);
+        }else if (low->key > temp->key) {
+            range.push_back(low->key);
+            return re_findRange(high, low->right, range, temp);
+        }else if (low->key < temp->key) {
+            range.push_back(low->key);
+            return re_findRange(high, low->left, range, temp);
+        }
+    }
 }
 vector<string> AVLTree::keys() const {
     AVLNode* temp = root;
