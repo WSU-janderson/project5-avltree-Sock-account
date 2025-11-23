@@ -7,33 +7,10 @@ using namespace std;
 bool AVLTree::insert(const string& key, size_t value) {
 
     re_insert(root, key, value);
-    //Right rotation
-    AVLNode* temp = new AVLNode(key, value);
-
-        if (root->left != nullptr) {
-            AVLNode* tamp = root;
-            AVLNode* tamp2 = root->left;
-            tamp->left = nullptr;
-            root = tamp2;
-            root->left = tamp;
-            root->right = temp;
-            return true;
-        }
-        //Left rotation
-        if (root->right != nullptr) {
-            AVLNode* tamp = root;
-            AVLNode* tamp2 = root->right;
-            tamp->right = nullptr;
-            root = tamp2;
-            root->left = tamp;
-            root->right = temp;
-            return true;
-        }
-
-    return true;
 }
 bool AVLTree::re_insert(AVLNode*& node, string key,size_t value) {
-    if (node == NULL) {
+
+    if (node == nullptr) {
         AVLNode* newNode = new AVLNode(key, value);
         node = newNode;
 
@@ -42,14 +19,69 @@ bool AVLTree::re_insert(AVLNode*& node, string key,size_t value) {
     if (node->key == key) {
         return false;
     }
+    bool inserted;
     if (node->key > key) {
-        node->height = node->height+1;
-        return re_insert(node->left, key, value);
+        inserted = re_insert(node->left, key, value);
     }if (node->key < key) {
-        node->height = node->height+1;
-        return re_insert(node->right, key, value);
+        inserted = re_insert(node->right, key, value);
     }
 
+
+    if (inserted == false) {
+        return false;
+    }
+
+    if (node->right == nullptr && node->left != nullptr) {
+        node->height = 1 + max(-1 , (int)node->left->height);
+    }else if (node->left == nullptr && node->right != nullptr) {
+        node->height = 1 + max(-1 , (int)node->right->height);
+    }else if (node->left == nullptr && node->right == nullptr) {
+        node->height = 0;
+    }
+    else {
+        node->height = 1 + max(node->right->height, node->left->height);
+    }
+
+    if (get_node_height(node->left) - get_node_height(node->right) >= 2 ) {
+        if (get_node_height(node->left->left) - get_node_height(node->left->right) == -1 ) {
+            //left rotation on the hook node
+            AVLNode *& childorsomething = node->left;
+            AVLNode *clone = childorsomething;
+            childorsomething = clone->right;
+            clone->right = childorsomething->left;
+            childorsomething->left = clone;
+            //update height of problem then hook
+        }
+        AVLNode *clone = node;
+        node = clone->left;
+        clone->left = node->right;
+        node->right = clone;
+        //update height of problem then hook
+    } if (get_node_height(node->left) - get_node_height(node->right) <= -2) {
+            if (get_node_height(node->right->left) - get_node_height(node->right->right) == 1 ) {
+             //right rotation on the hook node
+                AVLNode *& childorsomething = node->right;
+                AVLNode *clone = childorsomething;
+                childorsomething = clone->left;
+                clone->left = childorsomething->right;
+                childorsomething->right = clone;
+                //update height of problem then hook
+            }
+        AVLNode *clone = node;
+        node = clone->right;
+        clone->right = node->left;
+        node->left = clone;
+        //update height of problem then hook
+    }
+    return true;
+}
+int get_node_height(AVLTree::AVLNode * node) {
+    if (node == nullptr) {
+        return -1;
+    }
+    else {
+        return node->height;
+    }
 }
 bool AVLTree::remove(const string& key) {
 

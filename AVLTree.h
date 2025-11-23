@@ -42,6 +42,7 @@ public:
    AVLTree() : root(nullptr) {
 
    }
+    friend int get_node_height(AVLNode * node);
     bool insert(const string& key, size_t value);
 
     bool remove(const string& key);
