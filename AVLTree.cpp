@@ -300,4 +300,24 @@ bool AVLTree::re_remove_keytype(AVLNode *&current, KeyType key) {
     }
 }
 void AVLTree::balanceNode(AVLNode *&node) {
+    re_balanceNode(node);
+}
+void AVLTree::re_balanceNode(AVLNode* &node) {
+    if (node->right != NULL) {
+        balanceNode(node->right);
+    }
+    if (node->right != NULL && node->height < 2 || node->height > -2) {
+        node = root;
+        root = node->right;
+        root->left = node;
+
+    }  if (node->left != NULL) {
+        balanceNode(node->left);
+    }
+    if (node->left != NULL && node->height < 2 || node->height > -2) {
+        node = root;
+        root = node->left;
+        root->right = node;
+
+    }
 }

@@ -79,7 +79,7 @@ public:
     void re_operator_equals(AVLNode * temp, const AVLNode* tree);
 
     friend ostream& operator<<(ostream& os, const AVLTree & avlTree);
-
+    void re_balanceNode(AVLNode* &node);
     void operator=(const AVLTree& other);
     AVLTree(const AVLTree& other);
     private:
