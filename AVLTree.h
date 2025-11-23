@@ -23,8 +23,8 @@ protected:
         ValueType value;
         size_t height;
 
-        AVLNode* left;
-        AVLNode* right;
+        mutable AVLNode* left;
+        mutable AVLNode* right;
 
         // 0, 1 or 2
         size_t numChildren() const;
@@ -75,11 +75,15 @@ public:
 
     ~AVLTree();
 
+    void re_AVLTree();
+    void re_operator_equals(AVLNode * temp, const AVLNode* tree);
+
     friend ostream& operator<<(ostream& os, const AVLTree & avlTree);
 
     void operator=(const AVLTree& other);
     AVLTree(const AVLTree& other);
     private:
+
     AVLNode* root;
     bool re_insert(AVLNode*& node, string key,size_t value);
 

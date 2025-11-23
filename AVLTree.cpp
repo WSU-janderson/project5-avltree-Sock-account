@@ -164,7 +164,7 @@ vector<string> AVLTree::re_findRange(AVLNode *high, AVLNode *low,vector<string> 
 }
 vector<string> AVLTree::keys() const {
     AVLNode* temp = root;
-
+    AVLNode* temp2 = root->right;
     int keynum = 0;
     vector<string> keys;
     while (temp->left != NULL) {
@@ -174,9 +174,9 @@ vector<string> AVLTree::keys() const {
             temp = temp->left;
         }
     }
-    while (temp->right != NULL) {
-            keys[keynum] = temp->key;
-            temp = temp->right;
+    while (temp2->right != NULL) {
+            keys[keynum] = temp2->key;
+            temp2 = temp2->right;
             keynum++;
     }
 
@@ -184,36 +184,54 @@ vector<string> AVLTree::keys() const {
     return keys;
 }
 AVLTree::AVLTree(const AVLTree& other) {
-    AVLNode* temp = other.root;
-    AVLNode* tamp = root;
+    AVLNode * temp = other.root;
+    temp = root;
+    temp->left = root->left;
+    temp->right = root->right;
+    temp->height = root->height;
 
 
 }
 
 void AVLTree::operator=(const AVLTree& other) {
+    AVLNode * temp2 = other.root;
+    AVLNode *temp = root;
+    temp2 = root;
+    return re_operator_equals(temp, temp2);
+}
+void AVLTree::re_operator_equals(AVLNode* temp,const AVLNode* other) {
+    AVLNode* tamp = root;
+    if (temp == NULL) {
+        return;
 
+    }if (temp->left != NULL && temp->right == NULL) {
+        other->left = temp->left;
+        return re_operator_equals(temp->left,other->left);
+    }
+    if (temp->left == NULL && temp->right != NULL) {
+        other->right = temp->right;
+        return re_operator_equals(temp->right,other->right);
+    }
 }
 AVLTree::~AVLTree() {
-
+ root= NULL;
 }
+
 ostream& operator<<(ostream& os, const AVLTree & avlTree) {
 
     return os;
 }
 size_t AVLTree::AVLNode::numChildren() const {
-    if (this->AVLNode != )
-    return numChildren();
+    size_t count = height;
+    return count-1;
 }
 
-size_t AVLTree::AVLNode::re_numChildren(size_t count) const {
 
-    return count;
-}
 bool AVLTree::AVLNode::isLeaf() const {
-    if (this != root) {
+    if (height > 0) {
         return true;
     }
-
+    return false;
 }
 
 size_t AVLTree::AVLNode::getHeight() const {
