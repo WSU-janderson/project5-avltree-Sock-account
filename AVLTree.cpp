@@ -36,14 +36,17 @@ bool AVLTree::re_insert(AVLNode*& node, string key,size_t value) {
     if (node == NULL) {
         AVLNode* newNode = new AVLNode(key, value);
         node = newNode;
+
         return true;
     }
     if (node->key == key) {
         return false;
     }
     if (node->key > key) {
+        node->height = node->height+1;
         return re_insert(node->left, key, value);
     }if (node->key < key) {
+        node->height = node->height+1;
         return re_insert(node->right, key, value);
     }
 
@@ -198,16 +201,24 @@ ostream& operator<<(ostream& os, const AVLTree & avlTree) {
     return os;
 }
 size_t AVLTree::AVLNode::numChildren() const {
-
-    return 0;
+    if (this->AVLNode != )
+    return numChildren();
 }
 
+size_t AVLTree::AVLNode::re_numChildren(size_t count) const {
+
+    return count;
+}
 bool AVLTree::AVLNode::isLeaf() const {
-    return false;
+    if (this != root) {
+        return true;
+    }
+
 }
 
 size_t AVLTree::AVLNode::getHeight() const {
-    return 0;
+
+    return height;
 }
 
 bool AVLTree::removeNode(AVLNode*& current){

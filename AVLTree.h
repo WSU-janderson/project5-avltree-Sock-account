@@ -33,6 +33,7 @@ protected:
         // number of hops to deepest leaf node
         size_t getHeight() const;
 
+        size_t re_numChildren(size_t count) const;
 
 
     };
@@ -64,6 +65,7 @@ public:
     vector<string>re_findRange(AVLNode *high, AVLNode *low, vector<string> range, AVLNode * temp) const;
 
     vector<string>findRange(const string& lowKey, const string& highKey) const;
+
 
     vector<string> keys() const;
 
